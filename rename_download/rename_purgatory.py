@@ -1,12 +1,12 @@
 import os
 import zipfile
-from secrets.secrets import cm_download_path, carrier_data_path
+from holy_grail import cm_download_path, carrier_data_path
 
 
 def rename(carrier, kind, year, mon):
     i = 1
     for f in os.scandir(cm_download_path):
-        if len(os.listdir(cm_download_path)) == 1:
+        if len(os.listdir(cm_download_path)) == 2:
             while True:
                 restart = False
                 if f.is_file() and f.name.endswith('.xlsx') or f.name.endswith('.XLSX'):
@@ -35,13 +35,13 @@ def rename(carrier, kind, year, mon):
                     print('Your file has now left purgatory')
                 elif f.is_file() and f.name.endswith('.zip') or f.name.endswith('.ZIP'):
                     with zipfile.ZipFile(f, 'r') as zip_ref:
-                        zip_ref.extractall(chromedriver_download_path)
+                        zip_ref.extractall(cm_download_path)
                         os.remove(f)
                     restart = True
                     break
                 if not restart:
                     break
-        elif len(os.listdir(cm_download_path)) >= 2:
+        elif len(os.listdir(cm_download_path)) >= 3:
             while True:
                 restart = False
                 if f.is_file() and f.name.endswith('.xlsx') or f.name.endswith('.XLSX'):
@@ -74,7 +74,7 @@ def rename(carrier, kind, year, mon):
                     print('Your file has now left purgatory')
                 elif f.is_file() and f.name.endswith('.zip') or f.name.endswith('.ZIP'):
                     with zipfile.ZipFile(f, 'r') as zip_ref:
-                        zip_ref.extractall(chromedriver_download_path)
+                        zip_ref.extractall(cm_download_path)
                         os.remove(f)
                     restart = True
                     break

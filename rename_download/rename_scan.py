@@ -3,7 +3,7 @@ import os
 from re import search
 
 # import paths
-from secrets.secrets import carrier_data_path, scan_path, mail_path
+from holy_grail import carrier_data_path, scan_path, mail_path
 
 # iterate through folder
 for f in os.scandir(scan_path):
@@ -109,7 +109,18 @@ for f in os.scandir(scan_path):
                 except:
                     os.makedirs(new_path)
 
+        elif search('_FPU_', f.name):
 
+                # defining variables
+                kind = (f.name[5:9])
+                year = (f.name[10:14])
+                new_path = str(mail_path + kind + '/' + year + '/')
+
+                # try to move. If path does not exist - make it.
+                try:
+                    os.rename(f, new_path + f.name)
+                except:
+                    os.makedirs(new_path)
 
         # Move Checks
         elif search('ChecksDeposited', f.name):
