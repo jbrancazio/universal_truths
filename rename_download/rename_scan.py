@@ -2,6 +2,7 @@
 import os
 from re import search
 
+
 # import paths
 from holy_grail import carrier_data_path, scan_path, mail_path
 
@@ -21,6 +22,7 @@ for f in os.scandir(scan_path):
                     os.rename(f, new_path + f.name)
                 except:
                     os.makedirs(new_path)
+
 
         # Move DEL documents
         elif search('_DEL_', f.name):
@@ -44,7 +46,7 @@ for f in os.scandir(scan_path):
                 carrier = (f.name[:-14])
                 kind = (f.name[(len(f.name)-13):-11])
                 year = (f.name[-10:-6])
-                new_path = str(carrier_data_path + carrier + '/' + kind + '/' + year + '/')
+                new_path = str(carrier_data_path + carrier + '/' + kind + '/raw/')
 
                 # try to move. If path does not exist - make it.
                 try:
@@ -71,8 +73,8 @@ for f in os.scandir(scan_path):
         elif search('_EDD_', f.name):
 
                 # defining variables
-                kind = (f.name[5:8])
-                year = (f.name[9:13])
+                kind = (f.name[2:5])
+                year = (f.name[6:10])
                 new_path = str(mail_path + kind + '/' + year + '/')
 
                 # try to move. If path does not exist - make it.
@@ -85,8 +87,8 @@ for f in os.scandir(scan_path):
         elif search('_TAX_', f.name):
 
                 # defining variables
-                kind = (f.name[5:8])
-                year = (f.name[9:13])
+                kind = (f.name[2:5])
+                year = (f.name[6:10])
                 new_path = str(mail_path + kind + '/' + year + '/')
 
                 # try to move. If path does not exist - make it.
@@ -99,8 +101,8 @@ for f in os.scandir(scan_path):
         elif search('_MISC_', f.name):
 
                 # defining variables
-                kind = (f.name[5:9])
-                year = (f.name[10:14])
+                kind = (f.name[2:6])
+                year = (f.name[7:11])
                 new_path = str(mail_path + kind + '/' + year + '/')
 
                 # try to move. If path does not exist - make it.
@@ -112,8 +114,8 @@ for f in os.scandir(scan_path):
         elif search('_FPU_', f.name):
 
                 # defining variables
-                kind = (f.name[5:9])
-                year = (f.name[10:14])
+                kind = (f.name[2:5])
+                year = (f.name[6:10])
                 new_path = str(mail_path + kind + '/' + year + '/')
 
                 # try to move. If path does not exist - make it.
@@ -135,9 +137,4 @@ for f in os.scandir(scan_path):
                     os.rename(f, new_path + f.name)
                 except:
                     os.makedirs(new_path)
-
-
-
-
-
 

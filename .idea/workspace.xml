@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4f05f554-c90c-489b-b2c0-c2d4669a2787" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/universal_truths.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/universal_truths.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="4f05f554-c90c-489b-b2c0-c2d4669a2787" name="Default Changelist" comment="" />
+    <list id="e1f915c2-ead4-444c-9bfe-a28df5648ccb" name="Updating Scan script" comment="">
+      <change afterPath="$PROJECT_DIR$/secrets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/secrets/holy_grail.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/.idea/rename_download.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/rename_purgatory.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/rename_purgatory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rename_download/rename_scan.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/rename_scan.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,11 +72,27 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4f05f554-c90c-489b-b2c0-c2d4669a2787" name="Default Changelist" comment="" />
+      <changelist id="e1f915c2-ead4-444c-9bfe-a28df5648ccb" name="Updating Scan script" comment="" />
       <created>1614924392214</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614924392214</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updating purgatory">
+      <created>1616004464529</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1616004464529</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updating Scan script">
+      <created>1616517652228</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1616517652228</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -96,5 +106,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updating purgatory" />
+    <MESSAGE value="Updating Scan script" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updating Scan script" />
   </component>
 </project>
