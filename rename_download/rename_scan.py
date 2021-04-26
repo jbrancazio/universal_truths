@@ -2,7 +2,6 @@
 import os
 from re import search
 
-
 # import paths
 from holy_grail import carrier_data_path, scan_path, mail_path
 

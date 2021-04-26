@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4f05f554-c90c-489b-b2c0-c2d4669a2787" name="Default Changelist" comment="" />
+    <list default="true" id="4f05f554-c90c-489b-b2c0-c2d4669a2787" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rename_download/PDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/PDF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rename_download/rename_purgatory.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/rename_purgatory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rename_download/rename_scan.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/rename_scan.py" afterDir="false" />
+    </list>
     <list id="e1f915c2-ead4-444c-9bfe-a28df5648ccb" name="Updating Scan script" comment="">
       <change afterPath="$PROJECT_DIR$/secrets/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/secrets/holy_grail.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/rename_scan.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/rename_scan.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +42,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/rename_download" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="rename_scan" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -92,7 +100,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616517652228</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updating Scan Script">
+      <created>1616517875051</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616517875051</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding PDF">
+      <created>1617322405565</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1617322405565</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -110,6 +132,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updating purgatory" />
     <MESSAGE value="Updating Scan script" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updating Scan script" />
+    <MESSAGE value="Updating Scan Script" />
+    <MESSAGE value="Adding PDF" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding PDF" />
   </component>
 </project>
