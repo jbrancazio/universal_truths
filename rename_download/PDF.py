@@ -4,7 +4,7 @@ import os
 import re
 import pandas as pd
 import numpy as np
-from datetime import datetime
+from datetime import datetime, date
 
 
 def list_files(filepath, filetype):
@@ -45,25 +45,25 @@ def Christus_parser(raw_pdf):
         contact_type = None
         due_date = None
         for line in lines:
-            for match in re.finditer(r'^\>?\w*\!?t?\)?dear\s(\w+\s\w+\s?\w+?),?$', line):
+            for match in re.finditer(r'^\>?\w*\!?t?\)?dear\s(\w+\s\-?\w+\s?\-?\w*\s?\-?\w*),?$', line):
                 name = str(re.sub(r',?', '', re.sub(r'\>?\w*\!?t?\)?dear\s', '', match.group())))
             for match in re.finditer(r'^member\sid[:|;]\s(\d+)', line):
                 member_id = str(re.sub(r'^member\sid[:|;]\s', '', match.group()))
             if re.match(r'>?\w+:\s\w+\s\w+\scancellation\s\w+', line):
                 keep_ter.append(pageNum)
-                contact_type = 'Termination'
+                contact_type = 'termination'
             if re.match(r'\w+:\s\w+\s\w+\s\w+\s\w+\sterminated', line):
                 keep_ter.append(pageNum)
-                contact_type = 'Termination'
+                contact_type = 'termination'
             if re.match(r'\w+:\s\w+\s\w+\s\w+\s\w+\scancelled', line):
                 keep_ter.append(pageNum)
-                contact_type = 'Termination'
+                contact_type = 'termination'
             if re.match(r'\w+\s\w+\shipaa\s\w+\s\w+', line):
                 keep_ter.append(pageNum)
             if re.match(r'\w+:\swelcome!', line):
-                contact_type = 'Welcome'
+                contact_type = 'welcome'
             if re.match(r're\:\scredit\scard\spayment\sprocess', line) :
-                contact_type = 'Direct Deposit Change'
+                contact_type = 'direct deposit change'
             if re.match(r'^\$\d+\.\d{2}(\d{2}\/\d{2}\/\d{4})', line) or \
                     re.match(r'^(\d{2}\/\d{2}\/\d{4})\$\d+\.\d{2}', line) or \
                     re.match(r'^(\d{2}\/\d{2}\/\d{4})make\scheck\spayable', line) :
@@ -72,11 +72,11 @@ def Christus_parser(raw_pdf):
                 match_date = re.match(r'^\$\d+\.\d{2}(\d{2}\/\d{2}\/\d{4})', line)
                 match_date_2 = re.match(r'^(\d{2}\/\d{2}\/\d{4})\$\d+\.\d{2}', line)
                 match_date_3 = re.match(r'^(\d{2}\/\d{2}\/\d{4})make\scheck\spayable', line)
-                if match_date is not None :
+                if match_date is not None:
                     due_date = match_date.groups()[0]
-                if match_date_2 is not None :
+                if match_date_2 is not None:
                     due_date = match_date_2.groups()[0]
-                if match_date_2 is not None :
+                if match_date_2 is not None:
                     due_date = match_date_2.groups()[0]
                 contact_type = 'payment due'
                 pageObj_2 = pdfReader.getPage(pageNum + 1)
@@ -131,8 +131,8 @@ def Christus_parser(raw_pdf):
             pdf_del.write(out)
 
     # Add pages to pdf
-    if len(keep_ter) > 0 :
-        for i in range(len(keep_ter)) :
+    if len(keep_ter) > 0:
+        for i in range(len(keep_ter)):
             pdf_ter.addPage(pdfReader.getPage(keep_ter[i]))
 
         # assign path
@@ -170,10 +170,12 @@ def Cigna_parser(raw_pdf):
 
     pdf_del = PdfFileWriter()
     pdf_ter = PdfFileWriter()
+    pdf_change = PdfFileWriter()
     pdf_extra = PdfFileWriter()
 
     keep_del = []
     keep_ter = []
+    keep_change = []
     extra = []
     raw_data = pd.DataFrame(columns=['Carrier', 'Name', 'Member_Id', 'Contact_date', 'Contact_Type', 'Due_Date'])
 
@@ -188,18 +190,24 @@ def Cigna_parser(raw_pdf):
         due_date = None
         s_date = None
         for line in lines:
-            for match in re.finditer(r'^\w*\.?hello\s(\w+-?\s\w+\s?-?\w+?)', line):
+            for match in re.finditer(r'^\w*\.?hello\s(\w+-?\s\w+\s?-?\w*\s?-?\w*)', line):
                 name = str(re.sub(r'^\w*\.?hello\s', '', match.group()))
-            for match in re.finditer(r'^\>?\w*\!?t?\)?dear\s*(\w+-?\s\w+\s?-?\w+?)[:;]$', line):
-                name = str(re.sub(r'[:;]?', '', re.sub(r'\>?\w*\!?t?\)?dear\s*', '', match.group())))
+            for match in re.finditer(r'^\>?\w*\!?t?\)?dear\s*(\w+-?\s\w+\s?-?\w*\s?-?\w*)[:;]$', line):
+                name = str(re.sub(r'[:;]?', '', re.sub(r'^\>?\w*\!?t?\)?dear\s*', '', match.group())))
             for match in re.finditer(r'case[\:\;]\s?(\w{6})', line):
                 member_id = str(re.sub(r'case[\:\;]\s?', '', match.group()))
             for match in re.finditer(r'\w+\s\d{1,2}[\,\.]\s?\d{4}', line):
                 s_date = str(re.sub(r'\.', ',', match.group()))
                 s_date = str(re.sub(r' ', '', s_date))
                 s_date = datetime.strptime(s_date, '%B%d,%Y')
-            if re.match(r'^[\.!]deletion\sof\scoverage$', line) or re.match('^[\.!]subsidy\samount\schange$', line):
+            if re.match(r'^[\.!]deletion\sof\scoverage$', line) or \
+                    re.match('^[\.!]subsidy\samount\schange$', line) or \
+                    re.match(r'we’?ve\supdated\syour\s?enrollment\sinformation\.', line):
                 contact_type = 'coverage adjustment'
+                keep_change.append(pageNum)
+                keep_change.append(pageNum + 1)
+                keep_change.append(pageNum + 2)
+                keep_change.append(pageNum + 3)
             if re.match(r'\w*\s\w*\stermination\s\w*\s\w*\s\w*\.$', line):
                 keep_ter.append(pageNum)
                 keep_ter.append(pageNum + 1)
@@ -218,7 +226,7 @@ def Cigna_parser(raw_pdf):
             if re.match(r'your\sinsurance\spremium\sis\sone\smonth\spast', line) or \
                     re.match(r'\spast\sdue\.', line) or \
                     re.match(r'are still within your 31-day grace period\.', line) or \
-                    re.match(r'this\sis\sa\s?friendly\sreminder\.', line):
+                    re.match(r'this\sis\sa\s?friend[i,l]y\sreminder\.', line):
                 keep_del.append(pageNum)
                 keep_del.append(pageNum + 1)
                 keep_del.append(pageNum + 2)
@@ -230,11 +238,11 @@ def Cigna_parser(raw_pdf):
         if name is not None or member_id is not None:
             if name in raw_data.values and member_id in raw_data.values:
                 pass
-            else :
+            else:
                 raw_data = raw_data.append({'Carrier': del_carrier, 'Name': name, 'Member_Id': member_id,
                                             'Contact_date': s_date.strftime('%Y%m%d'), 'Contact_Type': contact_type,
                                             'Due_Date': due_date}, ignore_index=True)
-        if pageNum not in keep_del and pageNum not in keep_ter:
+        if pageNum not in keep_del and pageNum not in keep_ter and pageNum not in keep_change:
             extra.append(pageNum)
 
     # Add pages to pdf
@@ -263,6 +271,18 @@ def Cigna_parser(raw_pdf):
         with open(output_filename, 'wb') as out:
             pdf_ter.write(out)
 
+    if len(keep_change) > 0:
+        for i in range(len(keep_change)):
+            pdf_change.addPage(pdfReader.getPage(keep_change[i]))
+
+        # assign path
+        output_filename = '/Users/joshuabrancazio/Documents/carrier_data/' + str(del_carrier) + '/{}_Change_{}.pdf'.format(
+            str(del_carrier), str(del_date))
+
+        # write Delinquency PDF
+        with open(output_filename, 'wb') as out:
+            pdf_change.write(out)
+
     # Add pages to pdf
     if len(extra) > 0:
         for i in range(len(extra)):
@@ -281,11 +301,20 @@ def Cigna_parser(raw_pdf):
 my_file_list = list_files('/Users/joshuabrancazio/Purgatory/scan', '.pdf')
 print(my_file_list)
 
-master_df = pd.read_csv('~/Documents/mail/master_mail_contact.csv')
+daily_df = pd.DataFrame()
 
-master_df = master_df.append(Cigna_parser('/Users/joshuabrancazio/Purgatory/scan/Cigna_202103.pdf'), sort=False, ignore_index=True)
+for file in my_file_list:
+    if 'Christus' in os.path.basename(file):
+        daily_df = daily_df.append(Christus_parser(file), sort=False, ignore_index=True)
+    elif 'Cigna' in os.path.basename(file):
+        daily_df = daily_df.append(Cigna_parser(file), sort=False, ignore_index=True)
+
+master_df = pd.read_csv('~/Documents/mail/del_ter/master_mail_contact.csv')
+master_df = master_df.append(daily_df, ignore_index=True)
+master_df.to_csv('~/Documents/mail/del_ter/master_mail_contact.csv', index= False)
+
+today = date.today()
+daily_df = daily_df.loc[(daily_df['Contact_Type'] == 'past due') | (daily_df['Contact_Type'] == 'payment due') | (daily_df['Contact_Type'] == 'termination')]
+daily_df.to_csv(('~/Documents/mail/del_ter/del_ter_' + today.strftime('%Y%m%d') + '.csv'),index=False)
 
 
-master_df.to_csv('~/Documents/mail/master_mail_contact.csv', index= False)
-
-master_df = master_df[(master_df.Contact_date != '20210408') | (master_df.Carrier != 'Cigna')]

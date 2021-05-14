@@ -4,8 +4,6 @@
     <list default="true" id="4f05f554-c90c-489b-b2c0-c2d4669a2787" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rename_download/PDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/PDF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/rename_purgatory.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/rename_purgatory.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename_download/rename_scan.py" beforeDir="false" afterPath="$PROJECT_DIR$/rename_download/rename_scan.py" afterDir="false" />
     </list>
     <list id="e1f915c2-ead4-444c-9bfe-a28df5648ccb" name="Updating Scan script" comment="">
       <change afterPath="$PROJECT_DIR$/secrets/__init__.py" afterDir="false" />
